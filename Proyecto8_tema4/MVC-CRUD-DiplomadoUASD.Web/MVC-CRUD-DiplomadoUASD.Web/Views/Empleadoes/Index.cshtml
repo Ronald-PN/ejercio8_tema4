@@ -1,0 +1,110 @@
+﻿@model IEnumerable<MVC_CRUD_DiplomadoUASD.Models.Models.Empleado>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Empleados</h2>
+
+<div class="row">
+    <div class="col-sm-2">
+        <a class="btn btn-success" style="margin-bottom:10px" href="Empleadoes/Create">
+            Crear Nuevo
+        </a>
+    </div>
+    <div class="col-sm-10">
+        <input class="form-control" id="input_search" name="search" type="text" placeholder="busqueda...">
+    </div>
+</div>
+@*<a class="btn btn-primary" style="margin-bottom:10px" href="/Empleadoes/Create">
+        Crear Nuevo
+
+
+    </a>*@
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Apellido)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cedula)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Salario)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdDep)
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody id="table_body">
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Apellido)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cedula)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Salario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdDep)
+                    </td>
+                    <td>
+                        @*apareceran los botones de color que prefieras y te llevara a la direccion al link que desees*@
+                        <a href="/Empleadoes/Edit?id=@item.Id"
+                           class="btn btn-primary">Editar</a>
+
+                        <a href="/Empleadoes/Details?id=@item.Id"
+                           class="btn btn-success">Detalles</a>
+
+                        <a href="/Empleadoes/Delete?id=@item.Id"
+                           class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@*realiza la busqueda en la tabla*@
+
+@section scripts
+{
+
+    <script>
+        $(document).ready(function () {
+            $("#input_search").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#table_body tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+}
+</div>
+
+
+@*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+    }
+
+    </table>*@

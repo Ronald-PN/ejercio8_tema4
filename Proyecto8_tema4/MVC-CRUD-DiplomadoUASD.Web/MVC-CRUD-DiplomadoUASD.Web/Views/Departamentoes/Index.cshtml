@@ -1,0 +1,88 @@
+﻿@model IEnumerable<MVC_CRUD_DiplomadoUASD.Models.Models.Departamento>
+
+@{
+                /**/
+
+                ViewBag.Title = "Index";
+}
+
+<h2>Depatamento</h2>
+
+
+
+<div class="row">
+    <div class="col-sm-2">
+        <a class="btn btn-success" style="margin-bottom:10px" href="Departamentoes/Create">
+            Crear Nuevo
+        </a>
+    </div>
+    <div class="col-sm-10">
+        <input class="form-control" id="input_search" name="search" type="text" placeholder="busqueda...">
+    </div>
+</div>
+
+
+
+@*@Html.ActionLink("Create New", "Create")*@
+
+<div>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                Acciones
+            </th>
+        </tr>
+    </thead>
+    <tbody id="table_body">
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+                        @Html.ActionLink("Details", "Details", new { id=item.id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id=item.id })*@
+                    <a href="/Departamentoes/Edit?id=@item.id"
+                       class="btn btn-primary">Edit</a>
+
+                    <a href="/Departamentoes/Details?id=@item.id"
+                       class="btn btn-success">Details</a>
+
+                    <a href="/Departamentoes/Delete?id=@item.id"
+                       class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+
+@section scripts
+{
+   
+<script>
+    $(document).ready(function () {
+    $("#input_search").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#table_body tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+    });
+</script>
+}
+</div>
+
+
+
+
+
+
+
